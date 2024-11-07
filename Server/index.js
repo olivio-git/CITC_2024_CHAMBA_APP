@@ -23,7 +23,7 @@ server.use((err, req, res, next) => {
 const serverHttp = createServer(server);
 const io = initSocketIo(serverHttp);
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ alter: true }).then(() => {
     serverHttp.listen(PORT, async () => {
         console.log(`SERVER IS RUNNING on port ${PORT}`);
     });

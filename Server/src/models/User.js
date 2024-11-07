@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: UUIDV4, 
+      defaultValue: UUIDV4, // Cambiado a UUIDV4 para generar un UUID automáticamente
     },
     password: {
       type: DataTypes.STRING,
@@ -32,6 +32,10 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
+    },
+    geolocation: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false,
     },
   });
 };
