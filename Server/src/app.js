@@ -3,7 +3,10 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser"); 
- 
+const usuario = require("./routes/usuario"); 
+const empleadores = require("./routes/empleadores");
+const trabajadores = require("./routes/trabajadores");
+
 const server = express(); // Inicializamos la aplicación de Express
 server.disable("x-powered-by"); // Eliminar el encabezado X-Powered-By
 
@@ -42,7 +45,9 @@ server.use((req, res, next) => {
  
 // Definir rutas después de aplicar el middleware CORS
 //@@Example
-// server.use("/appi", router);  
+ server.use("/v1/usuario", usuario);  
+ server.use("/v1/empleadores", empleadores);  
+ server.use("/v1/trabajadores", trabajadores);  
 
 // Manejo de errores
 server.use((err, req, res, next) => {
