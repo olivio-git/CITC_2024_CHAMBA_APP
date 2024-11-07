@@ -1,12 +1,12 @@
-const empleadores = require("../services/empleadores");
-
+const { createEmpleadorService, findAll, deleteEmpleadorService, updateEmpleadorService } = require("../services/empleadores.service");
+const response = require("../utils/response");
 module.exports = {
     // Crear un nuevo empleador
-    create: async (req, res, next) => {
-        const { nombre, apellido } = req.body;
+    createEmpleador: async (req, res, next) => {
+        const { companyName,address,city,country,phone,companyDescription } = req.body;
         try {
-            const create = await empleadores.create(nombre, apellido);
-            res.status(200).json(create);
+            const create = await createEmpleadorService(companyName,address,city,country,phone,companyDescription);
+            response(res,200,create)
         } catch (error) {
             next(error); // Maneja el error
         }
@@ -15,18 +15,18 @@ module.exports = {
     // Obtener todos los empleadores
     findAll: async (req, res, next) => {
         try {
-            const empleadoresList = await empleadores.findAll();
-            res.status(200).json(empleadoresList);
+            const empleadoresList = await findAll();
+            response(res,200,empleadoresList);
         } catch (error) {
             next(error); // Maneja el error
         }
     },
 
     // Eliminar un empleador
-    delete: async (req, res, next) => {
+    deleteEmpleador: async (req, res, next) => {
         const { id } = req.params;
         try {
-            const deleted = await empleadores.delete(id);
+            const deleted = await deleteEmpleadorService(id);
             res.status(200).json({ message: `Empleador con ID ${id} eliminado`, deleted });
         } catch (error) {
             next(error); // Maneja el error
@@ -34,11 +34,11 @@ module.exports = {
     },
 
     // Actualizar un empleador
-    update: async (req, res, next) => {
+    updateEmpleador: async (req, res, next) => {
         const { id } = req.params;
-        const { nombre, apellido } = req.body;
+        const { companyName,address,city,phone,companyDescription } = req.body;
         try {
-            const updated = await empleadores.update(id, { nombre, apellido });
+            const updated = await updateEmpleadorService(id, companyName,address,city,phone,companyDescription);
             res.status(200).json(updated);
         } catch (error) {
             next(error); // Maneja el error

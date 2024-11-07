@@ -1,22 +1,31 @@
-const usuario = require("../dao/usuario");
-
+const {createUserDao, findAll, deleteUserDao, updateUserDao, findbyemail }=require ("../dao/usuarioDao")
 module.exports = {
-    create: async ({nombre,apellido}) => {
-        if(!nombre){
+    createUserService: async ({name, lastname, password, email, ci, state}) => {
+        if(!name){
             throw new Error("nombre is required");
         }
-        if(!apellido){
+        if(!lastname){
             throw new Error("apellido is required");
         }
-        const usuario = await usuario.createCategoria({nombre,apellido});
-    },findAll: async () => {
-        console.log("findAll");
+        const usuario = await createUserDao({name, lastname, password, email, ci, state});
+        return usuario
+    },
+    findAll: async () => {
+        const usuarios=await findAll();
+        return usuarios
       },
-      delete: async () => {
-        console.log("findAll");
+      findByEmailService: async (email) => {
+        const usuaremail = await findbyemailDao(email);
+          return await usuaremail
       },
-      update: async () => {
-        console.log("delete");
+
+      deleteUserService: async (id) => {
+        const userDel=await deleteUserDao(id);
+        return userDel
+      },
+      updateUserService: async (id, password) => {
+        const userUpd=await updateUserDao(id, password);
+        return userUpd
       },
     };
     

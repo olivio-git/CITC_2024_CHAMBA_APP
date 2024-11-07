@@ -1,16 +1,28 @@
-const { trabajadores } = require("../db");
+const { createTrabajador } = require("../controllers/trabajadores");
+const { worker } = require("../db");
 
 module.exports = {
-    createCategoria: async ({nombre,apellido}) => {
-        return await trabajadores.create({nombre,apellido});
+    createTrabajadorDao: async ({workExperience,education,certifications}) => {
+        return await worker.create({workExperience,education,certifications});
     },
     findAll: async () => {
-        console.log("findAll");
+        return await worker.findAll();
     },
-    delete: async () => {
-        console.log("findAll");
+    deleteTrabajadorDao: async (id) => {
+        return await worker.destroy({
+            where: {
+                workerId: id
+            }
+        });
     },
-    update: async () => {
-        console.log("delete");
+    updateTrabajadorDao: async (id, workExperience,education,certifications) => {
+        return await worker.update({
+            workExperience: workExperience,
+            education: education,
+            certifications: certifications
+        },
+           {where: { 
+            workerId:id  
+           }})
     },
 }

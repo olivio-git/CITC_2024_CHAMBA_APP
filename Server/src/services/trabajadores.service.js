@@ -1,19 +1,27 @@
-const trabajadores = require("../dao/trabajadores");
+const { createTrabajador } = require("../controllers/trabajadores");
+const {createTrabajadorDao, findAll, deleteTrabajadorDao, updateTrabajadorDao }=require ("../dao/trabajadoresDao")
+const { update } = require("./categoria");
 
 module.exports = {
-    create: async ({nombre,apellido}) => {
+    createTrabajadorService: async ({workExperience,education,certifications}) => {
         if(!nombre){
             throw new Error("nombre is required");
         }
         if(!apellido){
             throw new Error("apellido is required");
         }
-        const trabajadores = await trabajadores.createCategoria({nombre,apellido});
+        const trabajadores = await createTrabajadorDao({workExperience,education,certifications});
     },
     findAll: async()=>{
-        console.log('findAll');
+        const trab=await findAll();
+        return trab
     },
-    delete: async()=>{
-        console.log('delte');
+    deleteTrabajadorService: async(id)=>{
+        const trabDel=await deleteTrabajadorDao(id);
+        return trabDel
     },
+    updateTrabajadorService: async(id,workExperience,education,certifications)=>{
+        const trabUpd=await updateTrabajadorDao(id, workExperience,education,certifications);
+        return trabUpd
+    }
 }

@@ -1,16 +1,31 @@
-const { usuario } = require("../db");
-
+const {User} =require("../db")
 module.exports = {
-    createCategoria: async ({nombre,apellido}) => {
-        return await usuario.create({nombre,apellido});
+    createUserDao: async ({name, lastname, password, email, ci, state}) => {
+        return await User.create({name, lastname, password, email, ci, state})
     },
     findAll: async () => {
-        console.log("findAll");
+        return await User.findAll();
     },
-    delete: async () => {
-        console.log("findAll");
+    findbyemailDao:async (email) => {
+        return await User.find({
+            where: {
+                email: email
+            }
+        });
     },
-    update: async () => {
-        console.log("delete");
+    deleteUserDao: async (id) => {
+        return await User.destroy({
+            where: {
+                userId: id
+            }
+        });
+    },
+    updateUserDao: async (id, password) => {
+        return await User.update({
+            password: password
+        },
+           {where: { 
+            userId:id  
+           }})
     },
 }

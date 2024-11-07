@@ -3,18 +3,18 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser"); 
-<<<<<<< HEAD
+
 const usuario = require("./routes/usuario"); 
 const empleadores = require("./routes/empleadores");
 const trabajadores = require("./routes/trabajadores");
-=======
+
 
 const habilidades = require("./routes/habilidades"); // Importar el router de habilidades
 const ofertaEmpledo = require("./routes/ofertaEmpleo"); // Importar el router de ofertas
 const categorias = require("./routes/categoria"); // Importar el router de habilidades
 
 
->>>>>>> 0545e0fbfbabb98a2fa02a34b19ab850d467ca27
+
 
 const server = express(); // Inicializamos la aplicación de Express
 server.disable("x-powered-by"); // Eliminar el encabezado X-Powered-By
@@ -54,16 +54,20 @@ server.use((req, res, next) => {
  
 // Definir rutas después de aplicar el middleware CORS
 //@@Example
-<<<<<<< HEAD
+
  server.use("/v1/usuario", usuario);  
  server.use("/v1/empleadores", empleadores);  
  server.use("/v1/trabajadores", trabajadores);  
-=======
-server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
+
+
+//server.use("/api", router);  
+
+server.use("/v1/habilidades", habilidades);   //ROUTER PRINCIPAL
 server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
 server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
 
->>>>>>> 0545e0fbfbabb98a2fa02a34b19ab850d467ca27
+
+
 
 // Manejo de errores
 server.use((err, req, res, next) => {

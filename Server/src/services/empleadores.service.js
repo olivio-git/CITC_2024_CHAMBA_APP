@@ -1,22 +1,21 @@
-const empleadores = require("../dao/empleadores");
+const {createEmpleadorDao, findAll, deleteEmpleadorDao, updateEmpleadorDao }=require ("../dao/empleadoresDao")
 
 module.exports = {
-    create: async ({nombre,apellido}) => {
-        if(!nombre){
-            throw new Error("nombre is required");
-        }
-        if(!apellido){
-            throw new Error("apellido is required");
-        }
-        const empleadores = await empleadores.createCategoria({nombre,apellido});
-    },
-    find: async()=>{
-        console.log('create');
+    createEmpleadorService: async ({companyName,address,city,country,phone,companyDescription}) => {
+        const emp = await createUserDao({companyName,address,city,country,phone,companyDescription});
+        return emp
     },
     findAll: async()=>{
-        console.log('findAll');
+        const empl=await findAll();
+        return empl
     },
-    delete: async()=>{
-        console.log('delte');
+    deleteEmpleadorService: async(id)=>{
+        const emplDel=await deleteUserDao(id);
+        return emplDel
     },
+    updateEmpleadorService: async(id,companyName,address,city,phone,companyDescription)=>{
+        const emplUpd=await updateEmpleadorDao(id, companyName,address,city,phone,companyDescription);
+        return emplUpd
+    },
+    
 }

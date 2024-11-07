@@ -1,16 +1,30 @@
-const { empleadores } = require("../db");
+const { Employer } = require("../db");
 
 module.exports = {
-    createCategoria: async ({nombre,apellido}) => {
-        return await empleadores.create({nombre,apellido});
+    createEmpleadorDao: async ({companyName,address,city,country,phone,companyDescription}) => {
+        return await create({companyName,address,city,country,phone,companyDescription});
     },
     findAll: async () => {
-        console.log("findAll");
+        return await Employer.findAll();
     },
-    delete: async () => {
-        console.log("findAll");
+    deleteEmpleadorDao: async (id) => {
+        return await Employer.destroy({
+            where: {
+                employerId: id
+            }
+        });
     },
-    update: async () => {
-        console.log("delete");
+    updateEmpleadorDao: async (id,companyName,address,city,phone,companyDescription) => {
+        return await Employer.update({
+            companyName: companyName,
+            address: address,
+            city: city,
+            phone: phone,
+            companyDescription: companyDescription,
+
+        },
+           {where: { 
+            employerId:id  
+           }})
     },
 }
