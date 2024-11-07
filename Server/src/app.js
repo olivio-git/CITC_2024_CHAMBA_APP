@@ -42,7 +42,7 @@ server.use((req, res, next) => {
  
 // Definir rutas después de aplicar el middleware CORS
 //@@Example
-// server.use("/appi", router);  
+//server.use("/api", router);  
 
 // Manejo de errores
 server.use((err, req, res, next) => {
