@@ -1,4 +1,4 @@
-const {createUserDao, findAll, deleteUserDao, updateUserDao, findbyemail }=require ("../dao/usuarioDao")
+const {createUserDao, findAll, deleteUserDao, updateUserDao, findbyemailDao }=require ("../dao/usuarioDao")
 module.exports = {
     createUserService: async ({name, lastname, password, email, ci, state}) => {
         if(!name){

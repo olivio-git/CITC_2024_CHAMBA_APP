@@ -1,6 +1,6 @@
-const { createTrabajador } = require("../controllers/trabajadores");
+//const { createTrabajador } = require("../controllers/trabajadores");
 const {createTrabajadorDao, findAll, deleteTrabajadorDao, updateTrabajadorDao }=require ("../dao/trabajadoresDao")
-const { update } = require("./categoria");
+//const { update } = require("./categoria");
 
 module.exports = {
     createTrabajadorService: async ({workExperience,education,certifications}) => {
