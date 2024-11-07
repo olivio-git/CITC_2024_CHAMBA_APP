@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const habilidades = require("./routes/habilidades"); // Importar el router de habilidades
 const ofertaEmpledo = require("./routes/ofertaEmpleo"); // Importar el router de ofertas
 const categorias = require("./routes/categoria"); // Importar el router de habilidades
+const router = require('./routes/index');
 
 
 
@@ -49,10 +50,10 @@ server.use((req, res, next) => {
 // Definir rutas después de aplicar el middleware CORS
 //@@Example
 
-//server.use("/api", router);  
-server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
-server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
-server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
+server.use("/api", router);  
+// server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
+// server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
+// server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
 
 
 

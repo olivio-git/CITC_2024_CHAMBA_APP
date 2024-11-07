@@ -47,10 +47,13 @@ const {
   WorkerSkill,
   JobCategory,
   JobOfferCategory,
+  Location,
 } = sequelize.models;
 
 // Relaciones
 
+Location.hasOne(JobOffer, { foreignKey: "id" });
+JobOffer.belongsTo(JobOffer, { foreignKey: "id" });
 // User - Worker (One-to-One)
 User.hasOne(Worker, { foreignKey: "userId" });
 Worker.belongsTo(User, { foreignKey: "userId" });
