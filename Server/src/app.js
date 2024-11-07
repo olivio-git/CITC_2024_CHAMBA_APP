@@ -12,7 +12,7 @@ const trabajadores = require("./routes/trabajadores");
 const habilidades = require("./routes/habilidades"); // Importar el router de habilidades
 const ofertaEmpledo = require("./routes/ofertaEmpleo"); // Importar el router de ofertas
 const categorias = require("./routes/categoria"); // Importar el router de habilidades
-
+const router = require('./routes/index');
 
 
 
@@ -60,12 +60,10 @@ server.use((req, res, next) => {
  server.use("/v1/trabajadores", trabajadores);  
 
 
-//server.use("/api", router);  
-
-server.use("/v1/habilidades", habilidades);   //ROUTER PRINCIPAL
-server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
-server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
-
+server.use("/api", router);  
+// server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
+// server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
+// server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
 
 
 
