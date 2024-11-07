@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
     },
     geolocation: {
       type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
+      allowNull: true,
     },
   });
 };
