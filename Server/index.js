@@ -28,3 +28,4 @@ conn.sync({ force: false }).then(() => {
         console.log(`SERVER IS RUNNING on port ${PORT}`);
     });
 })
+ 
