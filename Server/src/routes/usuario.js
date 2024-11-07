@@ -1,5 +1,5 @@
 const express =require ('express'); 
-
+const { create } = require('../services/usuario.service');
 const router = express.Router();
 
 router.post('/create', );

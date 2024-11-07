@@ -1,8 +1,8 @@
-const { empleadores } = require("../db");
+const { categoria } = require("../db");
 
 module.exports = {
     createCategoria: async ({nombre,apellido}) => {
-        return await empleadores.create({nombre,apellido});
+        return await categoria.create({nombre,apellido});
     },
     findAll: async () => {
         console.log("findAll");

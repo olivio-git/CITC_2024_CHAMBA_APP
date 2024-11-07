@@ -10,13 +10,14 @@ module.exports = {
         }
         const categoria = await categoria.createCategoria({nombre,apellido});
     },
-    find: async()=>{
-        console.log('create');
+    findAll: async () => {
+      console.log("findAll");
     },
-    findAll: async()=>{
-        console.log('findAll');
+    delete: async () => {
+      console.log("findAll");
     },
-    delete: async()=>{
-        console.log('delte');
+    update: async () => {
+      console.log("delete");
     },
-}
+  };
+  
