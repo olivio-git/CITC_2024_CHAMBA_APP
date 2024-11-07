@@ -1,0 +1,24 @@
+{
+  "name": "chamba-app",
+  "version": "1.0.0",
+  "description": "Server aplication nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olivio-git/CITC_2024_CHAMBA_APP.git"
+  },
+  "keywords": [
+    "Server",
+    "AppChamba",
+    "ChambaApp"
+  ],
+  "author": "olivio,limber,jose,gustavo,roger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olivio-git/CITC_2024_CHAMBA_APP/issues"
+  },
+  "homepage": "https://github.com/olivio-git/CITC_2024_CHAMBA_APP#readme"
+}
