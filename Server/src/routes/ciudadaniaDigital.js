@@ -31,7 +31,7 @@ router.get("/session/login", async (req, res) => {
       redirect_uris: [urlCallback],
       response_types: ["code"],
     });
-
+  
     const nonce = generators.nonce();
     const state = generators.state();
 
