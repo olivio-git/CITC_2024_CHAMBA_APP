@@ -55,15 +55,15 @@ server.use((req, res, next) => {
 // Definir rutas después de aplicar el middleware CORS
 //@@Example
 
- server.use("/v1/usuario", usuario);  
- server.use("/v1/empleadores", empleadores);  
- server.use("/v1/trabajadores", trabajadores);  
+//  server.use("/v1/usuario", usuario);  
+//  server.use("/v1/empleadores", empleadores);  
+//  server.use("/v1/trabajadores", trabajadores);  
 
-
+//games.cba.org.bo/v1/usuario
 server.use("/api", router);  
-server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
-server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
-server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
+// server.use("/v1/usuario", habilidades);   //ROUTER PRINCIPAL
+// server.use("/v1/categorias", categorias);   //ROUTER PRINCIPAL
+// server.use("/v1/ofertas", ofertaEmpledo);   //ROUTER PRINCIPAL
 
 
 
