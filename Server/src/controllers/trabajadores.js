@@ -1,83 +1,64 @@
-const {
-  createTrabajadorService,
-  findAll,
-  deleteTrabajadorService,
-  updateTrabajadorService,
-} = require("../services/trabajadores.service");
-const response = require("../utils/response");
+const workerService = require("../services/trabajadoresService");
+
 module.exports = {
-  // Crear un nuevo empleador
-  createTrabajador: async (req, res, next) => {
-    const { workExperience, education, certifications } = req.body;
+  // Crear un trabajador
+  createWorkerController: async (req, res) => {
     try {
-      const create = await createTrabajadorService({
-        workExperience,
-        education,
-        certifications,
-      });
-      response(res, 200, create);
+      const data = req.body;
+      const worker = await workerService.createWorkerService(data);
+      res.status(201).json(worker); // Responde con el trabajador creado
     } catch (error) {
-      next(error); // Maneja el error
+      res.status(500).json({ error: error.message });
     }
   },
 
   // Obtener todos los trabajadores
-  findAll: async (req, res, next) => {
+  getAllWorkersController: async (req, res) => {
     try {
-      const trabajadoresList = await findAll();
-      response(res, 200, trabajadoresList);
+      const workers = await workerService.getAllWorkersService();
+      res.status(200).json(workers); // Responde con la lista de trabajadores
     } catch (error) {
-      next(error); // Maneja el error
+      res.status(500).json({ error: error.message });
     }
   },
 
-  // Eliminar un empleador
-  deleteTrabajador: async (req, res, next) => {
+  // Eliminar un trabajador
+  deleteWorkerController: async (req, res) => {
     const { id } = req.params;
     try {
-      const deleted = await deleteTrabajadorService(id);
-      res
-        .status(200)
-        .json({ message: `Trabajador con ID ${id} eliminado`, deleted });
+      const result = await workerService.deleteWorkerService(id);
+      if (result === 0) {
+        return res.status(404).json({ error: "Trabajador no encontrado" });
+      }
+      res.status(200).json({ message: "Trabajador eliminado" });
     } catch (error) {
-      next(error); // Maneja el error
+      res.status(500).json({ error: error.message });
     }
   },
 
-  // Actualizar un empleador
-  updateTrabajador: async (req, res, next) => {
+  // Actualizar un trabajador
+  updateWorkerController: async (req, res) => {
     const { id } = req.params;
-    const { workExperience, education, certifications } = req.body;
+    const data = req.body;
     try {
-      const updated = await updateTrabajadorService(
-        id,
-        workExperience,
-        education,
-        certifications
-      );
-      res.status(200).json(updated);
+      const result = await workerService.updateWorkerService(id, data);
+      if (result[0] === 0) {
+        return res.status(404).json({ error: "Trabajador no encontrado" });
+      }
+      res.status(200).json({ message: "Trabajador actualizado" });
     } catch (error) {
-      next(error); // Maneja el error
+      res.status(500).json({ error: error.message });
     }
   },
-  obtenerWorkers: async (req, res) => {
-    try {
-      // Capturamos los filtros de los parámetros de la consulta
-      const filters = {
-        workExperience: req.query.workExperience,
-        education: req.query.education,
-        certifications: req.query.certifications,
-        userId: req.query.userId,
-      };
 
-      const workers = await workerService.obtenerWorkersFiltrados(filters);
+  // Filtrar trabajadores
+  filterWorkersController: async (req, res) => {
+    const filters = req.query;
+    try {
+      const workers = await workerService.filterWorkersService(filters);
       res.status(200).json(workers);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          error: "Error fetching workers with filters: " + error.message,
-        });
+      res.status(500).json({ error: error.message });
     }
   },
 };
