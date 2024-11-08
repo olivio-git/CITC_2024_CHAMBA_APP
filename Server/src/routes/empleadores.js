@@ -1,11 +1,18 @@
-const express =require ('express'); 
-const { create } = require('../services/empleadores.service');
-const { createEmpleador, findAll, deleteEmpleador, updateEmpleador } = require('../controllers/empleadores');
+// employerRoutes.js
+const express = require("express");
 const router = express.Router();
+const {
+  createEmployerController,
+  getAllEmployersController,
+  getEmployerByIdController,
+  updateEmployerController,
+  deleteEmployerController,
+} = require("../controllers/empleadores");
 
-router.post('/create', createEmpleador );
-router.get('/find/:id', );
-router.delete('/:id', deleteEmpleador);
-router.put('/:id',updateEmpleador);
-router.get('/',findAll);
+router.post("/", createEmployerController);
+router.get("/", getAllEmployersController);
+router.get("/:id", getEmployerByIdController);
+router.put("/:id", updateEmployerController);
+router.delete("/:id", deleteEmployerController);
+
 module.exports = router;
