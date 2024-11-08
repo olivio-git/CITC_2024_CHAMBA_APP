@@ -1,47 +1,55 @@
-const { createEmpleadorService, findAll, deleteEmpleadorService, updateEmpleadorService } = require("../services/empleadores.service");
-const response = require("../utils/response");
+// employerController.js
+const {
+  createEmployerService,
+  getAllEmployersService,
+  getEmployerByIdService,
+  updateEmployerService,
+  deleteEmployerService,
+} = require("../services/empleadoresService");
+
 module.exports = {
-    // Crear un nuevo empleador
-    createEmpleador: async (req, res, next) => {
-        const { companyName,address,city,country,phone,companyDescription } = req.body;
-        try {
-            const create = await createEmpleadorService(companyName,address,city,country,phone,companyDescription);
-            response(res,200,create)
-        } catch (error) {
-            next(error); // Maneja el error
-        }
-    },
-
-    // Obtener todos los empleadores
-    findAll: async (req, res, next) => {
-        try {
-            const empleadoresList = await findAll();
-            response(res,200,empleadoresList);
-        } catch (error) {
-            next(error); // Maneja el error
-        }
-    },
-
-    // Eliminar un empleador
-    deleteEmpleador: async (req, res, next) => {
-        const { id } = req.params;
-        try {
-            const deleted = await deleteEmpleadorService(id);
-            res.status(200).json({ message: `Empleador con ID ${id} eliminado`, deleted });
-        } catch (error) {
-            next(error); // Maneja el error
-        }
-    },
-
-    // Actualizar un empleador
-    updateEmpleador: async (req, res, next) => {
-        const { id } = req.params;
-        const { companyName,address,city,phone,companyDescription } = req.body;
-        try {
-            const updated = await updateEmpleadorService(id, companyName,address,city,phone,companyDescription);
-            res.status(200).json(updated);
-        } catch (error) {
-            next(error); // Maneja el error
-        }
-    },
+  createEmployerController: async (req, res) => {
+    try {
+      const employer = await createEmployerService(req.body);
+      res.status(201).json(employer);
+    } catch (error) {
+      res.status(500).json({ error: "Error creating employer" });
+    }
+  },
+  getAllEmployersController: async (req, res) => {
+    try {
+      const employers = await getAllEmployersService();
+      res.status(200).json(employers);
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching employers" });
+    }
+  },
+  getEmployerByIdController: async (req, res) => {
+    try {
+      const employer = await getEmployerByIdService(req.params.id);
+      if (employer) {
+        res.status(200).json(employer);
+      } else {
+        res.status(404).json({ error: "Employer not found" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching employer" });
+    }
+  },
+  updateEmployerController: async (req, res) => {
+    try {
+      const employer = await updateEmployerService(req.params.id, req.body);
+      res.status(200).json(employer);
+    } catch (error) {
+      res.status(500).json({ error: "Error updating employer" });
+    }
+  },
+  deleteEmployerController: async (req, res) => {
+    try {
+      await deleteEmployerService(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: "Error deleting employer" });
+    }
+  },
 };
