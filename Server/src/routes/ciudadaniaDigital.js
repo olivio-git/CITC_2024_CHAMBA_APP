@@ -20,7 +20,7 @@ const clientSecret = CLIENT_SECRET;
 const urlCallback = URL_CALLBACK;
 const urlCallbackLogout = URL_CALLBACK_LOGOUT;
 const clientScope = CLIENT_SCOPE;
-
+const jwt = require("jsonwebtoken")
 router.get("/session/login", async (req, res) => {
     console.log(issuer,clientId,clientSecret,urlCallback,clientScope,urlCallbackLogout)
   try { 
@@ -55,7 +55,7 @@ router.get("/session/login", async (req, res) => {
 router.post("/verificar-sesion", async (req, res) => {
   try {
     const { query, nonce } = req.body;
-    
+    console.log(query)
     // Descubrir el servidor de identidad
     const clienteCiudadania = await Issuer.discover(issuer);
     
@@ -98,10 +98,13 @@ router.post("/verificar-sesion", async (req, res) => {
       };
 
       // Generar el token JWT
-      const token = jwt.sign(datosUsuario, JWT_SECRET, {
+      const token = jwt.sign(datosUsuario, "JWT_SECRET", {
         expiresIn: "1h"
       });
-
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 año
+        httpOnly: true,
+      });
       res.json({
         mensaje: "Sesión verificada exitosamente",
         ...datosUsuario,
