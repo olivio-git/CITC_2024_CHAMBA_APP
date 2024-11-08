@@ -25,4 +25,29 @@ module.exports = {
             workerId:id  
            }})
     },
+    findFilteredWorkers: async (filters) => {
+        const queryOptions = {
+          where: {},
+        };
+      
+        if (filters.workExperience) {
+          queryOptions.where.workExperience = { $like: `%${filters.workExperience}%` };
+        }
+        if (filters.education) {
+          queryOptions.where.education = { $like: `%${filters.education}%` };
+        }
+        if (filters.certifications) {
+          queryOptions.where.certifications = { $like: `%${filters.certifications}%` };
+        }
+        if (filters.userId) {
+          queryOptions.where.userId = filters.userId;
+        }
+      
+        try {
+          const workers = await Worker.findAll(queryOptions);
+          return workers;
+        } catch (error) {
+          throw new Error("Error retrieving workers with filters");
+        }
+      }
 }
