@@ -8,5 +8,6 @@ router.get('/', jobOfferController.getJobOffers);
 router.get('/:id', jobOfferController.getJobOfferById);
 router.put('/:id', jobOfferController.updateJobOffer);
 router.delete('/:id', jobOfferController.deleteJobOffer);
+router.get("/", jobOfferController.obtenerJobOffers);
 
 module.exports = router;
